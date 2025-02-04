@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react"
 import * as petService from './services/petServices'
 import PetList from "./components/PetList"
+import PetDetail from "./components/PetDetail"
 
 const App = () => {
 
   const [pets, setPets] = useState([])
+  const [selected, setSelected] = useState(null)
+
+  const handleSelect = (pet) => {
+    setSelected(pet)
+  }
 
   useEffect(() => {
     const fetchPets = async () => {
@@ -19,7 +25,8 @@ const App = () => {
 
   return (
     <>
-      <PetList pets={pets} />
+      <PetList pets={pets} handleSelect={handleSelect} />
+      <PetDetail selected={selected} />
     </>
   )
 }
